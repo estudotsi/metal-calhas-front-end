@@ -9,12 +9,16 @@ import { Pedido } from '../models/pedido.model';
 })
 export class PedidoService {
 
-private readonly baseUrl: string = "https://localhost:7149/api/Pedido"
+private readonly baseUrl: string = environment.apiUrl;
 
   constructor(public http: HttpClient) { }
 
   public buscarPedidos(): Observable<Pedido[]> {
-    return this.http.get<Pedido[]>('https://localhost:7149/api/Pedido');
+    return this.http.get<Pedido[]>(`${this.baseUrl}pedidos`);
   }
+
+  public cadastrarPedido(pedido: Pedido): Observable<Pedido> {
+    return this.http.post<Pedido>(`${this.baseUrl}pedidos`, pedido);
+    }
 
 }

@@ -1,0 +1,82 @@
+<app-titulo [titulo]="'Pedidos'" [subtitulo]="'Cadastro de Pedidos'"  [iconClass]="'bi bi-list-task'"></app-titulo>
+
+<div class="container-fluid rounded shadow-lg cadastro-pedido">
+
+  <form [formGroup]="formPedido" (ngSubmit)="cadastrarPedido()">
+    <fieldset>
+      <legend>Cadastrar Pedido</legend>
+      <div>
+        <label for="dataVenda" class="form-label mt-4">Data Pedido</label>
+        <input type="date" class="form-control" id="dataVenda" aria-describedby="" formControlName="dataVenda">
+      </div>
+      <div>
+        <label for="vendedor" class="form-label mt-4">Vendedor</label>
+        <select class="form-select" id="vendedor" formControlName="vendedor">
+          <option value="Paul">Paul</option>
+          <option value="Ringo">Ringo</option>
+          <option value="John">John</option>
+          <option value="George">George</option>
+        </select>
+      </div>
+      <div>
+        <label for="cliente" class="form-label mt-4">Cliente</label>
+        <select class="form-select" id="cliente" formControlName="cliente">
+          <option value="Peter">Peter</option>
+          <option value="Steve">Steve</option>
+          <option value="Tony">Tony</option>
+          <option value="Natasha">Natasha</option>
+        </select>
+      </div>
+      <div>
+        <label for="dataEntrega" class="form-label mt-4">Data Entrega</label>
+        <input type="date" class="form-control" id="dataEntrega" aria-describedby="" formControlName="dataEntrega">
+      </div>
+      <div>
+        <label for="hora" class="form-label mt-4">Hora da Entrega</label>
+        <input type="text" class="form-control"
+        [ngClass]="
+        (formPedido.get('hora')?.touched ||
+        formPedido.get('hora')?.dirty) &&
+        formPedido.get('hora')?.hasError('required')
+          ? 'is-invalid'
+          : '' || formPedido.get('hora')?.hasError('minlength')
+          ? 'is-invalid'
+          : '' ||
+            ((formPedido.get('hora')?.touched ||
+              formPedido.get('hora')?.dirty) &&
+              !formPedido.get('hora')?.invalid)
+          ? 'is-valid'
+          : ''
+      "
+        id="hora" aria-describedby="" formControlName="hora">
+      </div>
+      <div class="invalid-feedback">
+        {{
+          formPedido.get("hora")?.hasError("required")
+            ? " Name is required"
+            : ""
+        }}
+        {{
+          formPedido.get("hora")?.hasError("minlength")
+            ? " 5 letters required"
+            : ""
+        }}
+      </div>
+      <div>
+        <label for="valor" class="form-label mt-4">Valor</label>
+        <input type="text" class="form-control" id="valor" aria-describedby="" formControlName="valor">
+      </div>
+      <div>
+        <label for="observacao" class="form-label mt-4">Observações</label>
+        <textarea class="form-control" id="observacao" rows="3" formControlName="observacao"></textarea>
+      </div>
+
+      <div class="button-cadastrar-pedido">
+        <button type="submit" class="btn btn-primary">Cadastrar Pedido</button>
+      </div>
+
+    </fieldset>
+  </form>
+
+</div>
+

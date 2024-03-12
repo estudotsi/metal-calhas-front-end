@@ -1,17 +1,22 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, DEFAULT_CURRENCY_CODE, NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { NgxSpinnerModule } from "ngx-spinner";
-
+import ptBr from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
 import { AppComponent } from './app.component';
 import { TituloComponent } from '../app/componentes/shared/titulo/titulo.component';
 import { NavbarComponent } from '../app/componentes/shared/navbar/navbar.component';
 import { ListaPedidosComponent } from './componentes/pedidos/lista-pedidos/lista-pedidos.component';
 import { DetalhePedidoComponent } from './componentes/pedidos/detalhe-pedido/detalhe-pedido.component';
+import { CadastrarPedidoComponent } from './componentes/pedidos/cadastrar-pedido/cadastrar-pedido.component';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
+registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [
@@ -19,7 +24,8 @@ import { DetalhePedidoComponent } from './componentes/pedidos/detalhe-pedido/det
     TituloComponent,
     NavbarComponent,
     ListaPedidosComponent,
-    DetalhePedidoComponent
+    DetalhePedidoComponent,
+    CadastrarPedidoComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -28,11 +34,15 @@ import { DetalhePedidoComponent } from './componentes/pedidos/detalhe-pedido/det
     NgxSpinnerModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TooltipModule.forRoot(),
+    BsDatepickerModule.forRoot(),
   ],
   providers: [
     provideClientHydration(),
-    provideHttpClient(withFetch())
+    provideHttpClient(withFetch()),
+    {provide: LOCALE_ID, useValue: 'pt' },
+    {provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL'}
   ],
   bootstrap: [AppComponent]
 })

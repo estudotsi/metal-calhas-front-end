@@ -6,5 +6,6 @@ export interface Pedido {
   observacao: string;
   valor: string;
   dataEntrega: Date;
+  hora: string
 }
 

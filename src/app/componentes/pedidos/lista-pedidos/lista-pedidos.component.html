@@ -1,6 +1,6 @@
 <app-titulo [titulo]="'Pedidos'" [subtitulo]="'Lista de Pedidos'"  [iconClass]="'bi bi-list-task'"></app-titulo>
 
-<div class="card rounded shadow-sm p-3">
+<div class="card rounded shadow-sm p-3 mb-4">
 
   <div class="d-flex">
       <div class="flex-fill pr-3">
@@ -14,7 +14,7 @@
       <div class="custom-search">
           <a class="d-flex btn btn-outline-primary">
               <i class="bi bi-plus-circle-fill custom-icon-circle-fill"></i>
-              <b class="ml-1 d-none d-sm-block">Novo</b>
+              <b class="ml-1 d-none d-sm-block" routerLink="cadastrar-pedido/">Novo</b>
           </a>
       </div>
   </div>
@@ -32,6 +32,7 @@
               <th>Observação</th>
               <th>Valor</th>
               <th>Data Entrega</th>
+              <th>Hora Entrega</th>
               <th>Opções</th>
           </tr>
       </thead>
@@ -41,13 +42,14 @@
           <ng-container *ngFor="let pedido of pedidosFiltrados">
 
               <tr>
-                  <td>{{pedido.dataVenda}}</td>
+                  <td>{{pedido.dataVenda | date: 'dd/MM/yyyy'}}</td>
                   <!-- <td class="d-none d-md-table-cell"><img src="https://localhost:7284/resources/images/{{item.imagemURL}}" width="120px" height="60px" alt=""></td> -->
                   <td>{{pedido.vendedor}}</td>
                   <td>{{pedido.cliente}}</td>
                   <td>{{pedido.observacao}}</td>
-                  <td>{{pedido.valor}}</td>
-                  <td>{{pedido.dataEntrega}}</td>
+                  <td>{{pedido.valor | currency}}</td>
+                  <td>{{pedido.dataEntrega | date: 'dd/MM/yyyy HH:mm'}}</td>
+                  <td>{{pedido.hora }}</td>
                   <td class="d-flex">
                       <button type="button" class="btn btn-danger mb-3">
                       <i class="bi bi-trash"></i>
