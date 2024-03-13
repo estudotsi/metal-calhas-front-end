@@ -6,9 +6,9 @@
           <small>{{ subtitulo }}</small>
       </div>
   </div>
-  <div class="m-4">
-      <button class="btn btn-outline-light">
-    Listar {{ titulo }}
-  </button>
+  <div *ngIf="button" class="m-4">
+      <button routerLink="/" class="btn btn-outline-light">
+        Listar {{ titulo }}
+      </button>
   </div>
 </div>

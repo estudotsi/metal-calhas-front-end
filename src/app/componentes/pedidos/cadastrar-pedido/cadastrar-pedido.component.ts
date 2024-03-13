@@ -4,6 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Pedido } from '../../../models/pedido.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cadastrar-pedido',
@@ -14,20 +15,25 @@ export class CadastrarPedidoComponent implements OnInit{
 
   public formPedido!: FormGroup;
   public pedido?: Pedido;
+  public id?: any;
 
   constructor(private pedidoService: PedidoService,
               private spinner: NgxSpinnerService,
               private formBuilder: FormBuilder,
-              private router: Router) {}
+              private router: Router,
+              private toastr: ToastrService) {}
 
   ngOnInit() {
+
+
+
     this.formPedido = this.formBuilder.group({
       id: ['',],
       dataVenda: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       vendedor: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       cliente: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(80)]],
       observacao: ['', Validators.required],
-      valor: ['', Validators.required],
+      valor: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(10)] ],
       dataEntrega: ['', Validators.required],
       hora: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(10)] ],
     });
@@ -38,12 +44,12 @@ export class CadastrarPedidoComponent implements OnInit{
     this.spinner.show();
     this.pedidoService.cadastrarPedido(this.pedido!).subscribe({
       next: (data: any) => {
-        //this.toastr.showSuccess("Salvo com sucesso", data);
-        //this.listarOrgao();
+        this.toastr.success("Salvo com sucesso", data.id);
+        this.router.navigate([ '/' ]);
       },
       error: (error: any) => {
         this.spinner.hide();
-          //this.toastr.showError("ao salvar", "Problema");
+          this.toastr.error("Erro ao cadastrar", error.error);
       },
       complete: () => {
         //this.formDirective.resetForm();
@@ -51,5 +57,7 @@ export class CadastrarPedidoComponent implements OnInit{
       }
     })
   }
+
+
 
 }

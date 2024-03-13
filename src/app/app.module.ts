@@ -15,6 +15,8 @@ import { DetalhePedidoComponent } from './componentes/pedidos/detalhe-pedido/det
 import { CadastrarPedidoComponent } from './componentes/pedidos/cadastrar-pedido/cadastrar-pedido.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ToastrModule } from 'ngx-toastr';
+import { CurrencyMaskModule } from "ng2-currency-mask";
 
 registerLocaleData(ptBr);
 
@@ -37,6 +39,8 @@ registerLocaleData(ptBr);
     ReactiveFormsModule,
     TooltipModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    ToastrModule.forRoot({}),
+    CurrencyMaskModule
   ],
   providers: [
     provideClientHydration(),

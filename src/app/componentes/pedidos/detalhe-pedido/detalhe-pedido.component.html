@@ -1,1 +1,67 @@
-<p>detalhe-pedido works!</p>
+<app-titulo [titulo]="'Pedidos'" [subtitulo]="'Alterar de Pedido'"  [iconClass]="'bi bi-list-task'" [button]="true"></app-titulo>
+
+<div class="container-fluid rounded shadow-lg cadastro-pedido">
+
+  <form [formGroup]="formPedidoAlterar" (ngSubmit)="alterarPedido()">
+    <fieldset>
+      <legend>Cadastrar Pedido</legend>
+      <div>
+        <label for="dataVenda" class="form-label mt-4">Data Pedido</label>
+        <input type="date" class="form-control" id="dataVenda" aria-describedby="" formControlName="dataVenda">
+      </div>
+      <div>
+        <label for="vendedor" class="form-label mt-4">Vendedor</label>
+        <select selected="selected" class="form-select" id="vendedor" formControlName="vendedor">
+          <option value="Paul">Paul</option>
+          <option value="Ringo">Ringo</option>
+          <option value="John">John</option>
+          <option value="George">George</option>
+        </select>
+      </div>
+      <div>
+        <label for="cliente" class="form-label mt-4">Cliente</label>
+        <select class="form-select" id="cliente" formControlName="cliente">
+          <option value="Peter">Peter</option>
+          <option value="Steve">Steve</option>
+          <option value="Tony">Tony</option>
+          <option value="Natasha">Natasha</option>
+        </select>
+      </div>
+      <div>
+        <label for="dataEntrega" class="form-label mt-4">Data Entrega</label>
+        <input type="date" class="form-control" id="dataEntrega" aria-describedby="" formControlName="dataEntrega">
+      </div>
+      <div>
+        <label for="hora" class="form-label mt-4">Hora da Entrega</label>
+        <input type="time" class="form-control" id="hora" aria-describedby="" formControlName="hora">
+      </div>
+      <div>
+        <label for="valor" class="form-label mt-4">Valor</label>
+        <input type="text" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' , align: 'left'}"
+        currencyMask class="form-control" id="valor" aria-describedby="" [ngClass]="{ 'is-valid': formPedidoAlterar.get('valor')?.valid ,'is-invalid': formPedidoAlterar.get('valor')?.errors && formPedidoAlterar.get('valor')?.touched  }" formControlName="valor">
+      </div>
+      <div *ngIf="formPedidoAlterar.get('valor')?.hasError('required') && formPedidoAlterar.get('valor')?.touched" class="text-danger">
+        Valor obrigatório
+      </div>
+      <div *ngIf="formPedidoAlterar.get('valor')?.hasError('minlength')" class="text-danger">
+        Mínimo 2 caracteres
+      </div>
+      <div *ngIf="formPedidoAlterar.get('valor')?.hasError('maxlength')" class="text-danger">
+        Máximo 10 caracteres
+      </div>
+      <div *ngIf="formPedidoAlterar.get('valor')?.valid" class="text-success">
+        OK
+      </div>
+      <div>
+        <label for="observacao" class="form-label mt-4">Observações</label>
+        <textarea class="form-control" id="observacao" rows="3" formControlName="observacao"></textarea>
+      </div>
+
+      <div class="button-cadastrar-pedido">
+        <button type="submit" class="btn btn-primary">Alterar Pedido</button>
+      </div>
+
+    </fieldset>
+  </form>
+
+</div>
