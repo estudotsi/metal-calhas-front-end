@@ -17,6 +17,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ToastrModule } from 'ngx-toastr';
 import { CurrencyMaskModule } from "ng2-currency-mask";
+import { ModalComponent } from './componentes/shared/modal/modal.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 registerLocaleData(ptBr);
 
@@ -27,7 +29,8 @@ registerLocaleData(ptBr);
     NavbarComponent,
     ListaPedidosComponent,
     DetalhePedidoComponent,
-    CadastrarPedidoComponent
+    CadastrarPedidoComponent,
+    ModalComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -40,7 +43,8 @@ registerLocaleData(ptBr);
     TooltipModule.forRoot(),
     BsDatepickerModule.forRoot(),
     ToastrModule.forRoot({}),
-    CurrencyMaskModule
+    CurrencyMaskModule,
+    ModalModule.forRoot(),
   ],
   providers: [
     provideClientHydration(),
